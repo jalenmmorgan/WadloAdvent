@@ -1,12 +1,12 @@
 import sys
 import os
-from util import parse2DArrayFile, parseSingleCharacter2DArray, parseLineThenSpace
+from util import parse2DArrayFile
 from queue import PriorityQueue
 import numpy as np
 
 def run():
     os.chdir('day02')
-    parsed = parseLineThenSpace("day02.txt")
+    parsed = parseLineThenSpace("day02.txt", "\n", " ")
     print(parsed)
 
     score = 0

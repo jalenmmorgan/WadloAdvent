@@ -21,14 +21,40 @@ def parse2DArrayFile(fileName, rowSeparator, colSeparator, makeNumbers = False):
     else:
         return withCols
 
-def parse2DArrayDoubleNewLine(fileName, makeNumbers=False):
-    return parse2DArrayFile(fileName, "\n\n", "\n", makeNumbers)
+def parse1DArrayFile(fileName, rowSeparator, makeNumbers = False):
+    f = open(fileName, "r")
+    text = f.read()
+    rows = text.split(rowSeparator)
 
-def parseSingleCharacter2DArray(fileName, makeNumbers=False):
-    return parse2DArrayFile(fileName, "\n", "", makeNumbers)
+    if makeNumbers:  
+        return [stringToNumber(item) for item in rows]
+    else:
+        return rows
 
-def parseLineThenSpace(fileName, makeNumbers=False):
-    return parse2DArrayFile(fileName, "\n", " ", makeNumbers)
+def parseAllNumbersFromSentences(fileName):
+    f = open(fileName, "r")
+    text = f.read()
+    rows = text.split('\n')
+
+    out = []
+    for row in rows:
+        currList = []
+        currString = ""
+        for char in row:
+            
+            if str(char).isnumeric():
+                print(char)
+                currString += char
+            else:
+                if len(currString) > 0:
+                    currList.append(int(currString))
+                currString = ""
+            
+        if len(currString) > 0:
+            currList.append(int(currString))
+        out.append(currList)
+    return out
+
 
 def stringToNumber(item):
     if item == "":
